@@ -1,1 +1,1 @@
-# BotForPosting
+This bot is designed to automate publications in the Telegram channel with anime voice acting, the bot is made for the team AniLeague.tv

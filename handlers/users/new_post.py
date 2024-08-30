@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.types import CallbackQuery
 from loader import dp
 from data.config import ADMINS_ID, CHANNEL_ID
-from data.member_list import members, editors, members_links, editors_links
+from data.member_list import members, editors
 from keyboards.inline.members_keyboard import inline_members_kb, inline_editors_kb, inline_confirmation_kb
 from states.FSM_States import PostForm
 from aiogram.dispatcher import FSMContext
@@ -149,14 +149,14 @@ async def next1(callback: CallbackQuery, state: FSMContext):
         #Дабберы
         post += "Озвучивали:\n"
         for member in members_arr:
-            member_link = members_links.get(member) #Ссылки для Дабберов
+            member_link = members.get(member) #Ссылки для Дабберов
             if member_link:
                 post += f"►<a href='{member_link}'>{member}</a>\n"
                 
         #Монтажёры
         post += f"\nТайминг и работа со звуком: \n"
         for editor in editors_arr:
-            editor_link = editors_links.get(editor) #Ссылки для Монтажёров
+            editor_link = editors.get(editor) #Ссылки для Монтажёров
             if editor_link:
                 post += f"►<a href='{editor_link}'>{editor}</a>\n"
         

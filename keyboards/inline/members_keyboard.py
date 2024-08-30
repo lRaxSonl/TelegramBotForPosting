@@ -4,7 +4,7 @@ from data.member_list import members, editors
 #Клавиатура с дабберами
 inline_members_kb = InlineKeyboardMarkup(row_width=3)
 
-for member in members:
+for member in members.keys():
     inline_members_kb.insert(InlineKeyboardButton(text=member, callback_data=member))
 
 inline_members_kb.insert(InlineKeyboardButton(text="Далее ⬆️", callback_data="next"))
@@ -13,7 +13,7 @@ inline_members_kb.insert(InlineKeyboardButton(text="Далее ⬆️", callback
 #Клавиатура с монтажёрами
 inline_editors_kb = InlineKeyboardMarkup(row_width=3)
 
-for editor in editors:
+for editor in editors.keys():
     inline_editors_kb.insert(InlineKeyboardButton(text=editor, callback_data=editor))
     
 inline_editors_kb.insert(InlineKeyboardButton(text="Далее ⬆️", callback_data="next2"))

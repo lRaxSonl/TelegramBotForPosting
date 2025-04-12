@@ -1,25 +1,56 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from data.member_list import members, editors
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import InlineKeyboardMarkup
+from database.requests import get_all_voice_actors, get_all_editors, get_all_tags
+
 
 #Клавиатура с дабберами
-inline_members_kb = InlineKeyboardMarkup(row_width=3)
+async def create_members_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
 
-for member in members.keys():
-    inline_members_kb.insert(InlineKeyboardButton(text=member, callback_data=member))
+    members = await get_all_voice_actors()
 
-inline_members_kb.insert(InlineKeyboardButton(text="Далее ⬆️", callback_data="next"))
+    for member in members:
+        builder.button(text=member.name, callback_data=f"member_{member.name}")
+
+    builder.button(text="Далее ⬆️", callback_data="next")
+    builder.adjust(3)
+    return builder.as_markup()
 
 
 #Клавиатура с монтажёрами
-inline_editors_kb = InlineKeyboardMarkup(row_width=3)
+async def create_editors_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
 
-for editor in editors.keys():
-    inline_editors_kb.insert(InlineKeyboardButton(text=editor, callback_data=editor))
-    
-inline_editors_kb.insert(InlineKeyboardButton(text="Далее ⬆️", callback_data="next2"))
+    editors = await get_all_editors()
+
+    for editor in editors:
+        builder.button(text=editor.name, callback_data=f"editor_{editor.name}")
+
+    builder.button(text="Далее ⬆️", callback_data="next2")
+    builder.adjust(3)
+    return builder.as_markup()
 
 
-inline_confirmation_kb = InlineKeyboardMarkup(row_width=2)
+async def create_tags_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
 
-inline_confirmation_kb.insert(InlineKeyboardButton(text='Да ✅', callback_data='res_yes'))
-inline_confirmation_kb.insert(InlineKeyboardButton(text='Нет ❌', callback_data='res_no'))
+    tags = await get_all_tags()
+
+    for tag in tags:
+        builder.button(text=tag.name, callback_data=f"tag|{tag.name}")
+
+    builder.button(text="Далее ⬆️", callback_data="next3")
+    builder.adjust(3)
+    return builder.as_markup()
+
+
+#Клавиатура подтверждения публикации
+def create_confirmation_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    builder.button(text="Да ✅", callback_data="res_yes")
+    builder.button(text="Нет ❌", callback_data="res_no")
+    builder.adjust(2)
+    return builder.as_markup()
+
+
+inline_confirmation_kb = create_confirmation_keyboard()

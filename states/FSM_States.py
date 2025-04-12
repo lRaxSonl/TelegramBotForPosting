@@ -1,4 +1,4 @@
-from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.fsm.state import State, StatesGroup
 
 class PostForm(StatesGroup):
     video1 = State()
@@ -8,3 +8,23 @@ class PostForm(StatesGroup):
     kodik_link = State()
     members = State()
     editors = State()
+    tags = State()
+
+
+class ActorFSM(StatesGroup):
+    name = State()
+    link = State()
+
+class EditorFSM(StatesGroup):
+    name = State()
+    link = State()
+
+class TagFSM(StatesGroup):
+    name = State()
+
+
+class ModeratorFSM(StatesGroup):
+    tg_id = State()
+
+class AdminFSM(StatesGroup):
+    tg_id = State()

@@ -1,5 +1,10 @@
-API = 'Your Telegram API key'
+import logging
 
-ADMINS_ID = ['Admin id']
+API = ''
 
-CHANNEL_ID = 'Your Telegram channel ID'
+ADMINS_ID = []
+
+LOGING_LEVEL = logging.INFO #DEBUG INFO WARNING
+ECHO_DATABASE = True
+
+CHANNEL_ID = '' #Main channel

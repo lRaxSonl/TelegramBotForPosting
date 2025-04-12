@@ -1,3 +1,3 @@
-from .users import dp
+from .users import router
 
-__all__ = ['dp']
+__all__ = ['router']
